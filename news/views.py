@@ -18,7 +18,6 @@ class IndexView(generic.ListView):
         context = super().get_context_data()
         category_list = Category.objects.all()
         context['category_list']= category_list
-        print("testing git")
         return  context
 
 
