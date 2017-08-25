@@ -1,9 +1,9 @@
 {% extends "news/home.html" %}
 {% block content %}
-
+    {% block news %}
     <div class="row">
         <div class="col-md-9">
-            {% block news %}
+
                 {% if latest_news_list %}
                     <ul >
                         {% for n in latest_news_list %}

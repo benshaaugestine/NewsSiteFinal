@@ -39,6 +39,11 @@ class CategoryView(generic.ListView):
             return cat.news_set.all()
         else:
             return self.model._default_manager.all()
+    def get_context_data(self):
+        context = super().get_context_data()
+        category_list = Category.objects.all()
+        context['category_list']= category_list
+        return  context
 
 
 
