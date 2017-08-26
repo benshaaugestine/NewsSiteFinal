@@ -1,6 +1,5 @@
 from . import views
-from django.conf.urls import url,include
-from django.contrib.auth import views as auth_view
+from django.conf.urls import url
 
 app_name = 'news'
 urlpatterns = [

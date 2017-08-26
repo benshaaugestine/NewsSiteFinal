@@ -2,12 +2,17 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
+from django.shortcuts import reverse
 
 
 class Category(models.Model):
     category_name=models.CharField(max_length=100)
+
     def __str__(self):
         return self.category_name
+
+    def get_absolute_url(self):
+        return reverse('news:category',kwargs={'pk':self.pk})
 
 class News(models.Model):
     title= models.CharField(max_length=200)
@@ -18,6 +23,9 @@ class News(models.Model):
 
     class Meta:
         ordering = ["-pub_date"]
+
+    def get_absolute_url(self):
+        return reverse('news:detail',kwargs={'pk':self.pk})
 
     def __str__(self):
         return self.title

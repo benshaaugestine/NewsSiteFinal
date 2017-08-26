@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
+from django.http import HttpResponse
+
+from django.views.generic import TemplateView
+from django.contrib.sitemaps.views import sitemap
+from news.sitemaps import NewsSitemap,CategorySitemap
 from django.contrib.flatpages.views import flatpage
 
 # Your other patterns here
+sitemaps= {'news':NewsSitemap,'category':CategorySitemap}
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -26,7 +32,8 @@ urlpatterns = [
     url(r'^widgets/',include('widgets.urls')),
     url(r'^pages/', include('django.contrib.flatpages.urls',)),
     url(r'^comments/', include('django_comments.urls')),
-    url(r'^accounts/', include('allauth.urls'))
-
+    url(r'^accounts/', include('allauth.urls')),
+    url(r'^robots.txt$', TemplateView.as_view(template_name="robots.txt", content_type="text/plain"), name="robots_file"),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 
 ]
